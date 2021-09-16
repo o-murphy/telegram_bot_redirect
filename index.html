@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+function get(name){
+   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
+}
+tg = 'https://t.me/'
+start = get(get('change'))
+bot = get('bot')
+
+if (start != undefined && bot != undefined) {
+    window.location.href = `${tg+bot}?start=${start}`
+} else {
+    close()
+}
+</script>
+</body>
+</html>
