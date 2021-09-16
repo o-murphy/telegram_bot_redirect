@@ -7,7 +7,7 @@ function get(name){
       return decodeURIComponent(name[1]);
 }
 tg = 'https://t.me/'
-bot, start = get('start').split(',')
+const [bot, start] = get('start').split(',')
 if (start != undefined && bot != undefined) {
     window.location.href = `${tg+bot}?start=${start}`
 } else {
