@@ -7,13 +7,15 @@ function get(name){
       return decodeURIComponent(name[1]);
 }
 tg = 'https://t.me/'
+to = get(to)
+
+   console.log(to)
+   
 start = get(get('change'))
 bot = get('bot')
 
 if (start != undefined && bot != undefined) {
     window.location.href = `${tg+bot}?start=${start}`
-} else {
-    close()
 }
 </script>
 </body>
