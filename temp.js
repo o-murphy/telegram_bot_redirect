@@ -1,1 +1,1 @@
-
+document.getElementByClass('expand-menu').innerHTML = '<li><a target="_blank" href="https://t.me/tcs_okdesk_bot"><span dir="auto" class="menuname">Telegram<span style="background-image: url(\'https://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;"></span><span></span></span></a></li>';
