@@ -5,5 +5,5 @@ telegram_link.innerHTML = '<li><a target="_blank" href="https://t.me/tcs_okdesk_
 menu_ul.appendChild(telegram_link);
 
 let okdesk_link = document.createElement('li');
-okdesk_link.innerHTML = '<li><a target="_blank" href="https://trans-control.okdesk.ru/"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Telegram</span></span></a></li>';
+okdesk_link.innerHTML = '<li><a target="_blank" href="https://trans-control.okdesk.ru/"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>OKDESK</span></span></a></li>';
 menu_ul.appendChild(okdesk_link);
