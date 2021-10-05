@@ -18,5 +18,5 @@
     }
   catch (err) {
       // do nothing
-  }
-    })()
+    }
+  })()
