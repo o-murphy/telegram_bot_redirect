@@ -19,7 +19,7 @@
     }
   catch (err) {
       // do nothing
-
+  }
     })()
 
 
