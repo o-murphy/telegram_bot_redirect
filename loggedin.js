@@ -5,8 +5,8 @@
       menu_ul = menu.firstChild;
 
       let separator = document.createElement('li');
-      separator.innerHTML = '<li class="menu-separator-top"></li>'
-      menu_ul.appendChild(separator)
+      separator.innerHTML = '<li class="menu-separator-top"></li>';
+      menu_ul.appendChild(separator);
 
       let telegram_link = document.createElement('li');
       telegram_link.innerHTML = '<li><a target="_blank" href="https://t.me/tcs_okdesk_bot"><span dir="auto" class="menuname"><span style="background-image: url(\'https://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Telegram</span></span></a></li>';
@@ -21,5 +21,3 @@
       // do nothing
   }
     })()
-
-
