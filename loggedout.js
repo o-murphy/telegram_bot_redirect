@@ -19,4 +19,4 @@
   catch (err) {
       // do nothing
     }
-  })()
+  })() 
