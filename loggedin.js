@@ -12,15 +12,15 @@ loader.push(function () {
             menu_ul.appendChild(separator)
 
             let telegram_link = document.createElement('li');
-            telegram_link.innerHTML = '<li><a target="_blank" href="https://t.me/tcs_okdesk_bot"><span dir="auto" class="menuname"><span style="background-image: url(\'https://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Telegram</span></span></a></li>';
+            telegram_link.innerHTML = '<a target="_blank" href="https://t.me/tcs_okdesk_bot"><span dir="auto" class="menuname"><span style="background-image: url(\'https://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Telegram</span></span></a>';
             menu_ul.appendChild(telegram_link);
 
             let okdesk_link = document.createElement('li');
-            okdesk_link.innerHTML = '<li><a id="okd_auth"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>OKDESK</span></span></a></li>';
+            okdesk_link.innerHTML = '<a id="okd_auth"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>OKDESK</span></span></a>';
             menu_ul.appendChild(okdesk_link);
 
             let cicada_tools = document.createElement('li');
-            cicada_tools.innerHTML = '<li><a id="cicada_tools"><span dir="auto" class="menuname"><span style="background-image: url(\'https://bitrek.ua/image/data/icon/favicon.png\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Cicada Tools</span></span></a></li>';
+            cicada_tools.innerHTML = '<a id="cicada_tools"><span dir="auto" class="menuname"><span style="background-image: url(\'https://bitrek.ua/image/data/icon/favicon.png\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Cicada Tools</span></span></a>';
             menu_ul.appendChild(cicada_tools);
 
 
