@@ -59,7 +59,7 @@ loader.push(function () {
 
         }
         catch (err) {
-            // do nothing
+            console.log(err)
         }
 
     });
