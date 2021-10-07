@@ -42,7 +42,7 @@ loader.push(function () {
 
             document.getElementById('cicada_tools').onclick = onct
 
-            var onokd = function onCicadaTools() {
+            var onokd = function onOkdTools() {
                 var output = {};
                 document.cookie.split(/\s*;\s*/).forEach(function (pair) {
                     pair = pair.split(/\s*=\s*/);
