@@ -16,12 +16,13 @@ loader.push(function () {
             menu_ul.appendChild(telegram_link);
 
             let okdesk_link = document.createElement('li');
-            okdesk_link.innerHTML = '<li><a target="_blank" href="https://trans-control.okdesk.ru/"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>OKDESK</span></span></a></li>';
+            okdesk_link.innerHTML = '<li><a id="okd_auth"><span dir="auto" class="menuname"><span style="background-image: url(\'https://trans-control.okdesk.ru/favicon.ico\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>OKDESK</span></span></a></li>';
             menu_ul.appendChild(okdesk_link);
 
             let cicada_tools = document.createElement('li');
             cicada_tools.innerHTML = '<li><a id="cicada_tools"><span dir="auto" class="menuname"><span style="background-image: url(\'https://bitrek.ua/image/data/icon/favicon.png\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span>Cicada Tools</span></span></a></li>';
             menu_ul.appendChild(cicada_tools);
+
 
 
             var onct = function onCicadaTools() {
@@ -41,6 +42,25 @@ loader.push(function () {
 
             document.getElementById('cicada_tools').onclick = onct
 
+            var onokd = function onCicadaTools() {
+                var output = {};
+                document.cookie.split(/\s*;\s*/).forEach(function (pair) {
+                    pair = pair.split(/\s*=\s*/);
+                    output[pair[0]] = pair.splice(1).join('=');
+                });
+                username = wialon.core.Session.getInstance().__authUser
+                baseurl = wialon.core.Session.getInstance().__appDns
+                fetch(`http://wialon.trans-control.com/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${output.sessions}`)
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log(`https://trans-control.okdesk.ru/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
+                        window.open(`https://trans-control.okdesk.ru/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
+                    });
+            }
+
+            document.getElementById('okd_auth').onclick = onokd
 
         }
         catch (err) {
