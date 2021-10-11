@@ -102,7 +102,7 @@ loader.push(function () {
 
 
                     let resetBat = function onResetBat() {
-                        var answer = window.confirm("Reset?");
+                        var answer = window.confirm("Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!");
                         if (answer === true) {
 
                             let dns = wialon.core.Session.getInstance().__appDns
