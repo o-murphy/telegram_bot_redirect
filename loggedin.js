@@ -3,10 +3,13 @@ loader.push(function () {
         // make sure that if an error occurs, it doesn't break other scripts on the page
 
         try {
+            username = wialon.core.Session.getInstance().__authUser
+            baseurl = wialon.core.Session.getInstance().__appDns
+            sid = wialon.core.Session.getInstance().__sessionId
 
             menu = document.getElementById('sub_dom_f5acebef_3');
             menu_ul = menu.firstChild;
-            
+
             menu_support = document.getElementById('sub_dom_f5acebef_3_5');
 
             new_menu_support = document.createElement('a')
@@ -32,9 +35,7 @@ loader.push(function () {
                     pair = pair.split(/\s*=\s*/);
                     output[pair[0]] = pair.splice(1).join('=');
                 });
-                username = wialon.core.Session.getInstance().__authUser
-                baseurl = wialon.core.Session.getInstance().__appDns
-                sid = wialon.core.Session.getInstance().__sessionId
+
                 fetch(`http://wialon.trans-control.com/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
                     .then((response) => {
                         return response.json();
@@ -64,6 +65,108 @@ loader.push(function () {
             document.getElementById('okd_login').onclick = onokd
             document.getElementById('cicada_tools').onclick = onct
 
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+
+
+
+        try {
+            (function () {
+                var ev = new $.Event('remove'),
+                    orig = $.fn.remove;
+                var evap = new $.Event('append'),
+                    origap = $.fn.append;
+                $.fn.remove = function () {
+                    $(this).trigger(ev);
+                    return orig.apply(this, arguments);
+                }
+                $.fn.append = function () {
+                    $(this).trigger(evap);
+                    return origap.apply(this, arguments);
+                }
+
+
+            })
+
+                ();
+            $(document.getElementById('monitoring_units_target')).on('append', function (e) {
+                let target = e.currentTarget
+                let bats = target.querySelectorAll('[mod="monitoring_units_battery"]')
+                console.log(bats)
+
+                bats.forEach(element => {
+                    let child = element.firstChild
+                    let object_id = parseInt(child.classList[0].split('-')[3])
+                    element.setAttribute('target_tip', 'Обнулить заряд')
+
+
+                    let resetBat = function onResetBat() {
+                        var answer = window.confirm("Reset?");
+                        if (answer === true) {
+
+                            let dns = wialon.core.Session.getInstance().__appDns
+                            let sid = wialon.core.Session.getInstance().__sessionId
+
+                            let url = `http://${dns}/wialon/ajax.html`
+                            let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
+
+
+                            let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
+                            sens_id = Object.values(sens).map((x) => x).find(x => x.n === 'reset_battery_value').id
+
+                            let params = {
+                                "itemId": object_id,
+                                "n": "reset_battery_value",
+                                "t": "custom",
+                                "d": "cicada_tools_aс",
+                                "m": "",
+                                "p": `const${sens103}`,
+                                "f": 0,
+                                "c": "{\"act\":0,\"appear_in_popup\":false,\"ci\":{},\"cm\":1,\"mu\":0,\"pos\":6,\"show_time\":false,\"timeout\":0}",
+                                "vt": 0,
+                                "vs": 0,
+                                "tbl": [],
+                                "unlink": false,
+                                "callMode": 'update',
+                                'id': sens_id
+                            }
+
+                            formData = `svc=unit/update_sensor&params=${JSON.stringify(params)}&sid=${sid}`
+
+                            async function postData(url = '', data = '') {
+                                const response = await fetch(url, {
+                                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                                    mode: 'cors', // no-cors, *cors, same-origin
+                                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                                    credentials: 'same-origin', // include, *same-origin, omit
+                                    headers: {
+                                        // 'Content-Type': 'application/json'
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                    },
+                                    body: data
+                                });
+                                return await response.json();
+                            }
+
+                            postData(url, formData)
+                                .then((data) => {
+                                    console.log(data); // JSON data parsed by `response.json()` call
+                                });
+
+
+                        }
+                    }
+
+                    element.onclick = resetBat
+
+                });
+
+            });
+
+            $(document).on('remove', function (e) { });
         }
         catch (err) {
             console.log(err);
