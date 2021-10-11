@@ -3,6 +3,8 @@ loader.push(function () {
         // make sure that if an error occurs, it doesn't break other scripts on the page
 
         try {
+
+
             menu = document.getElementById('sub_dom_f5acebef_3');
             menu_ul = menu.firstChild;
 
@@ -34,7 +36,7 @@ loader.push(function () {
                 username = wialon.core.Session.getInstance().__authUser
                 baseurl = wialon.core.Session.getInstance().__appDns
                 sid = wialon.core.Session.getInstance().__sessionId
-                fetch(`http://wialon.trans-control.com/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
+                fetch(`http://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
                     .then((response) => {
                         return response.json();
                     })
