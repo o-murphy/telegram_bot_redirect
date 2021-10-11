@@ -3,10 +3,6 @@ loader.push(function () {
         // make sure that if an error occurs, it doesn't break other scripts on the page
 
         try {
-            username = wialon.core.Session.getInstance().__authUser
-            baseurl = wialon.core.Session.getInstance().__appDns
-            sid = wialon.core.Session.getInstance().__sessionId
-
             menu = document.getElementById('sub_dom_f5acebef_3');
             menu_ul = menu.firstChild;
 
@@ -35,7 +31,9 @@ loader.push(function () {
                     pair = pair.split(/\s*=\s*/);
                     output[pair[0]] = pair.splice(1).join('=');
                 });
-
+                username = wialon.core.Session.getInstance().__authUser
+                baseurl = wialon.core.Session.getInstance().__appDns
+                sid = wialon.core.Session.getInstance().__sessionId
                 fetch(`http://wialon.trans-control.com/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
                     .then((response) => {
                         return response.json();
