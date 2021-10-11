@@ -98,7 +98,7 @@ loader.push(function () {
                 bats.forEach(element => {
                     let child = element.firstChild
                     let object_id = parseInt(child.classList[0].split('-')[3])
-                    element.setAttribute('target_tip', 'Обнулить заряд')
+                    element.setAttribute('title', 'Нажмите, что бы обнулить заряд')
 
 
                     let resetBat = function onResetBat() {
