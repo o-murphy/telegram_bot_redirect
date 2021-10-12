@@ -8,13 +8,9 @@ loader.push(function () {
         var okdeskUrl = 'https://trans-control.okdesk.ru'
 
         try {
-
-
             menu = document.getElementById('sub_dom_f5acebef_3');
             menu_ul = menu.firstChild;
-
             menu_support = document.getElementById('sub_dom_f5acebef_3_5');
-
             new_menu_support = document.createElement('a')
             new_menu_support.setAttribute('id', 'okd_login')
             new_menu_support.innerHTML = `<span class="menuname" style="background-image: url(\'${okdeskFav}\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Техподдержка</span>`
@@ -66,18 +62,14 @@ loader.push(function () {
                         window.open(`https://t.me/${telegramCicadaTools}?start=${data.authHash}`)
                     });
             }
-
             document.getElementById('okd_login').onclick = onokd
             document.getElementById('cicada_tools').onclick = onct
-
         }
         catch (err) {
             console.log(err);
         }
 
-
         try {
-
             let dns = wialon.core.Session.getInstance().__appDns
             let sid = wialon.core.Session.getInstance().__sessionId
 
@@ -99,7 +91,6 @@ loader.push(function () {
             }
 
             (function () {
-
                 var ev = new $.Event('remove'),
                     orig = $.fn.remove;
                 var evap = new $.Event('append'),
@@ -112,8 +103,6 @@ loader.push(function () {
                     $(this).trigger(evap);
                     return origap.apply(this, arguments);
                 }
-
-
             })();
 
             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
@@ -122,11 +111,9 @@ loader.push(function () {
 
                 bats.forEach(element => {
 
-
                     let child = element.firstChild
                     let object_id = parseInt(child.classList[0].split('-')[3])
-
-                    hw_type = WebCMS.getHwById(wialon.core.Session.getInstance().__itemsById[object_id].$$user_deviceTypeId)
+                    let hw_type = WebCMS.getHwById(wialon.core.Session.getInstance().__itemsById[object_id].$$user_deviceTypeId)
 
                     if (hw_type.name === 'Bitrek BI 310') {
 
@@ -141,7 +128,6 @@ loader.push(function () {
 
                                 let url = `http://${dns}/wialon/ajax.html`
                                 let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
-
 
                                 let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
                                 sens_id = Object.values(sens).map((x) => x).find(x => x.n === 'reset_battery_value').id
@@ -169,22 +155,16 @@ loader.push(function () {
                                     .then((data) => {
                                         console.log()
                                     });
-
-
                             }
                         }
-
                         element.onclick = resetBat
                     }
                 });
-
             });
-
             $(document).on('remove', function (e) { });
         }
         catch (err) {
             console.log(err);
         }
-
     });
 });
