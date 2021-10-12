@@ -46,7 +46,6 @@ loader.push(function () {
                         return response.json();
                     })
                     .then((data) => {
-                        console.log(`https://${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
                         window.open(`https://${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
                     });
             }
@@ -77,10 +76,30 @@ loader.push(function () {
         }
 
 
-
-
         try {
+
+            let dns = wialon.core.Session.getInstance().__appDns
+            let sid = wialon.core.Session.getInstance().__sessionId
+
+            let url = `http://${dns}/wialon/ajax.html`
+
+            async function postData(url = '', data = '') {
+                const response = await fetch(url, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, *cors, same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        // 'Content-Type': 'application/json'
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: data
+                });
+                return await response.json();
+            }
+
             (function () {
+
                 var ev = new $.Event('remove'),
                     orig = $.fn.remove;
                 var evap = new $.Event('append'),
@@ -95,79 +114,68 @@ loader.push(function () {
                 }
 
 
-            })
+            })();
 
-                ();
             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
                 let target = e.currentTarget
                 let bats = target.querySelectorAll('[mod="monitoring_units_battery"]')
-                console.log(bats)
 
                 bats.forEach(element => {
+
+
                     let child = element.firstChild
                     let object_id = parseInt(child.classList[0].split('-')[3])
-                    element.setAttribute('title', 'Нажмите, что бы обнулить заряд')
+
+                    hw_type = WebCMS.getHwById(wialon.core.Session.getInstance().__itemsById[object_id].$$user_deviceTypeId)
+
+                    if (hw_type.name === 'Bitrek BI 310') {
+
+                        element.setAttribute('title', 'Нажмите, что бы обнулить заряд')
+
+                        let resetBat = function onResetBat() {
+                            var answer = window.confirm("Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!");
+                            if (answer === true) {
+
+                                let dns = wialon.core.Session.getInstance().__appDns
+                                let sid = wialon.core.Session.getInstance().__sessionId
+
+                                let url = `http://${dns}/wialon/ajax.html`
+                                let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
 
 
-                    let resetBat = function onResetBat() {
-                        var answer = window.confirm("Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!");
-                        if (answer === true) {
+                                let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
+                                sens_id = Object.values(sens).map((x) => x).find(x => x.n === 'reset_battery_value').id
 
-                            let dns = wialon.core.Session.getInstance().__appDns
-                            let sid = wialon.core.Session.getInstance().__sessionId
+                                let params = {
+                                    "itemId": object_id,
+                                    "n": "reset_battery_value",
+                                    "t": "custom",
+                                    "d": "cicada_tools_aс",
+                                    "m": "",
+                                    "p": `const${sens103}`,
+                                    "f": 0,
+                                    "c": "{\"act\":0,\"appear_in_popup\":false,\"ci\":{},\"cm\":1,\"mu\":0,\"pos\":6,\"show_time\":false,\"timeout\":0}",
+                                    "vt": 0,
+                                    "vs": 0,
+                                    "tbl": [],
+                                    "unlink": false,
+                                    "callMode": 'update',
+                                    'id': sens_id
+                                }
 
-                            let url = `http://${dns}/wialon/ajax.html`
-                            let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
+                                formData = `svc=unit/update_sensor&params=${JSON.stringify(params)}&sid=${sid}`
+
+                                postData(url, formData)
+                                    .then((data) => {
+                                        console.log()
+                                    });
 
 
-                            let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
-                            sens_id = Object.values(sens).map((x) => x).find(x => x.n === 'reset_battery_value').id
-
-                            let params = {
-                                "itemId": object_id,
-                                "n": "reset_battery_value",
-                                "t": "custom",
-                                "d": "cicada_tools_aс",
-                                "m": "",
-                                "p": `const${sens103}`,
-                                "f": 0,
-                                "c": "{\"act\":0,\"appear_in_popup\":false,\"ci\":{},\"cm\":1,\"mu\":0,\"pos\":6,\"show_time\":false,\"timeout\":0}",
-                                "vt": 0,
-                                "vs": 0,
-                                "tbl": [],
-                                "unlink": false,
-                                "callMode": 'update',
-                                'id': sens_id
                             }
-
-                            formData = `svc=unit/update_sensor&params=${JSON.stringify(params)}&sid=${sid}`
-
-                            async function postData(url = '', data = '') {
-                                const response = await fetch(url, {
-                                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                                    mode: 'cors', // no-cors, *cors, same-origin
-                                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                                    credentials: 'same-origin', // include, *same-origin, omit
-                                    headers: {
-                                        // 'Content-Type': 'application/json'
-                                        'Content-Type': 'application/x-www-form-urlencoded',
-                                    },
-                                    body: data
-                                });
-                                return await response.json();
-                            }
-
-                            postData(url, formData)
-                                .then((data) => {
-                                    console.log(data); // JSON data parsed by `response.json()` call
-                                });
-
-
                         }
+
+                        element.onclick = resetBat
                     }
-
-                    element.onclick = resetBat
-
                 });
 
             });
