@@ -1,11 +1,28 @@
 loader.push(function () {
     WebCMS.after_init_call(function () {
-        // make sure that if an error occurs, it doesn't break other scripts on the page
+    // make sure that if an error occurs, it doesn't break other scripts on the page
 
         var telegramBot = "https://t.me/tcs_okdesk_bot"
         var telegramCicadaTools = "tcs_cicada_bot"
         var okdeskFav = 'https://static-ck.okdesk.ru/okdesktest/favicons/1/original/okdesk_avatar_02_no-bg_%282%29.ico'
         var okdeskUrl = 'https://trans-control.okdesk.ru'
+
+        language = wialon.core.Session.getInstance().__currUser.$$user_customProps.language
+
+        lang_dict = {
+            'ru': {
+                'title': 'Нажмите, что бы обнулить заряд',
+                'alert': "Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!"
+            },
+            'uk': {
+                'title': 'Натисніть, щоб скинути заряд',
+                'alert': "Ви точно хочете скинути заряд акумулятора? Цю дію не можна скасувати!"
+            },
+            'en': {
+                'title': 'Click, to reset battery charge',
+                'alert': "Are you sure you want to reset your battery? This action cannot be undone!"
+            },
+        }
 
         try {
             menu = document.getElementById('sub_dom_f5acebef_3');
@@ -117,10 +134,10 @@ loader.push(function () {
 
                     if (hw_type.name === 'Bitrek BI 310') {
 
-                        element.setAttribute('title', 'Нажмите, что бы обнулить заряд')
+                        element.setAttribute('title', lang_dict[language]['title'])
 
                         let resetBat = function onResetBat() {
-                            var answer = window.confirm("Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!");
+                            var answer = window.confirm(lang_dict[language]['alert']);
                             if (answer === true) {
 
                                 let dns = wialon.core.Session.getInstance().__appDns
