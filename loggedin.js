@@ -122,17 +122,17 @@ loader.push(function () {
                 }
             })();
 
-            $(document.getElementById('monitoring_units_target')).on('append', function (e) {
-                let target = e.currentTarget
-                let sensor_squares = target.querySelectorAll('[mod="monitoring_units_sensor"]')
+//             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
+//                 let target = e.currentTarget
+//                 let sensor_squares = target.querySelectorAll('[mod="monitoring_units_sensor"]')
 
-                sensor_squares.forEach(element => {
-                    if (element.firstChild.firstChild.firstChild) {
-                        element.firstChild.firstChild.firstChild.style['border-radius'] = '50%'
-                    }
-                })
+//                 sensor_squares.forEach(element => {
+//                     if (element.firstChild.firstChild.firstChild) {
+//                         element.firstChild.firstChild.firstChild.style['border-radius'] = '50%'
+//                     }
+//                 })
 
-            })
+//             })
 
             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
                 let target = e.currentTarget
