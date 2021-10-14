@@ -1,6 +1,6 @@
 loader.push(function () {
     WebCMS.after_init_call(function () {
-    // make sure that if an error occurs, it doesn't break other scripts on the page
+        // make sure that if an error occurs, it doesn't break other scripts on the page
 
         var telegramBot = "https://t.me/tcs_okdesk_bot"
         var telegramCicadaTools = "tcs_cicada_bot"
@@ -135,6 +135,7 @@ loader.push(function () {
                     if (hw_type.name === 'Bitrek BI 310') {
 
                         element.setAttribute('title', lang_dict[language]['title'])
+                        element.setAttribute('style', 'cursor: pointer;');
 
                         let resetBat = function onResetBat() {
                             var answer = window.confirm(lang_dict[language]['alert']);
@@ -175,6 +176,12 @@ loader.push(function () {
                             }
                         }
                         element.onclick = resetBat
+                        element.onmouseover = function () {
+                            element.firstChild.firstChild.setAttribute('class', 'icon-remove')
+                        }
+                        element.onmouseleave = function () {
+                            element.firstChild.firstChild.setAttribute('class', 'icon-battery-quater')
+                        }
                     }
                 });
             });
