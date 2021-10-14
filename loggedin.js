@@ -134,7 +134,6 @@ loader.push(function () {
 
                     if (hw_type.name === 'Bitrek BI 310') {
 
-                        element.setAttribute('title', lang_dict[language]['title'])
                         element.setAttribute('style', 'cursor: pointer;');
 
                         let resetBat = function onResetBat() {
@@ -176,10 +175,10 @@ loader.push(function () {
                             }
                         }
                         element.onclick = resetBat
-                        element.onmouseover = function () {
+                        element.firstChild.onmouseover = function () {
                             element.firstChild.firstChild.setAttribute('class', 'icon-remove')
                         }
-                        element.onmouseleave = function () {
+                        element.firstChild.onmouseleave = function () {
                             element.firstChild.firstChild.setAttribute('class', 'icon-battery-quater')
                         }
                     }
