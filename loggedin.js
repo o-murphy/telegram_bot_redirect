@@ -59,7 +59,7 @@ loader.push(function () {
                         return response.json();
                     })
                     .then((data) => {
-                        window.open(`https://${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
+                        window.open(`${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
                     });
             }
 
