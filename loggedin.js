@@ -186,12 +186,15 @@ loader.push(function () {
                                     });
                             }
                         }
+                        
+                        let own_class = element.firstChild.firstChild.classList[0]
+                        
                         element.onclick = resetBat
                         element.firstChild.onmouseover = function () {
                             element.firstChild.firstChild.setAttribute('class', 'icon-remove')
                         }
                         element.firstChild.onmouseleave = function () {
-                            element.firstChild.firstChild.setAttribute('class', 'icon-battery-quater')
+                            element.firstChild.firstChild.setAttribute('class', own_class)
                         }
                     }
                 });
