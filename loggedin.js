@@ -35,7 +35,9 @@ loader.push(function () {
 
             elements = [
                 '<li class="menu-separator-top"></li>',
-                `<a target="_blank" href="${telegramBot}"><span class="menuname" style="background-image: url(\'https://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Telegram</span></a>`,
+                `<a target="_blank" href="${telegramBot}"><span class="menuname" style="background-image: url(\'
+                
+                s://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Telegram</span></a>`,
                 '<a id="cicada_tools"><span class="menuname" style="background-image: url(\'https://bitrek.ua/image/data/icon/favicon.png\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Cicada Tools</span></a>'
             ]
 
@@ -54,7 +56,7 @@ loader.push(function () {
                 username = wialon.core.Session.getInstance().__authUser
                 baseurl = wialon.core.Session.getInstance().__appDns
                 sid = wialon.core.Session.getInstance().__sessionId
-                fetch(`http://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
+                fetch(`https://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
                     .then((response) => {
                         return response.json();
                     })
@@ -71,7 +73,7 @@ loader.push(function () {
                 });
                 baseurl = wialon.core.Session.getInstance().__appDns
                 sid = wialon.core.Session.getInstance().__sessionId
-                fetch(`http://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
+                fetch(`https://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
                     .then((response) => {
                         return response.json();
                     })
@@ -90,7 +92,7 @@ loader.push(function () {
             let dns = wialon.core.Session.getInstance().__appDns
             let sid = wialon.core.Session.getInstance().__sessionId
 
-            let url = `http://${dns}/wialon/ajax.html`
+            let url = `https://${dns}/wialon/ajax.html`
 
             async function postData(url = '', data = '') {
                 const response = await fetch(url, {
@@ -155,7 +157,7 @@ loader.push(function () {
                                 let dns = wialon.core.Session.getInstance().__appDns
                                 let sid = wialon.core.Session.getInstance().__sessionId
 
-                                let url = `http://${dns}/wialon/ajax.html`
+                                let url = `https://${dns}/wialon/ajax.html`
                                 let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
 
                                 let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
