@@ -36,7 +36,7 @@ loader.push(function () {
             elements = [
                 '<li class="menu-separator-top"></li>',
                 `<a target="_blank" href="${telegramBot}"><span class="menuname" style="background-image: url(\'
-                
+
                 s://telegram.org/favicon.ico?3\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Telegram</span></a>`,
                 '<a id="cicada_tools"><span class="menuname" style="background-image: url(\'https://bitrek.ua/image/data/icon/favicon.png\');display: inline-block;height: 14px;width: 14px;background-size: cover;margin-right: 0.5rem"></span><span class="menuname">Cicada Tools</span></a>'
             ]
@@ -48,39 +48,31 @@ loader.push(function () {
             })
 
             var onokd = function onOkdTools() {
-                var output = {};
-                document.cookie.split(/\s*;\s*/).forEach(function (pair) {
-                    pair = pair.split(/\s*=\s*/);
-                    output[pair[0]] = pair.splice(1).join('=');
-                });
                 username = wialon.core.Session.getInstance().__authUser
                 baseurl = wialon.core.Session.getInstance().__appDns
-                sid = wialon.core.Session.getInstance().__sessionId
-                fetch(`https://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        window.open(`${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http%3A%2F%2F${baseurl}&authHash=${data.authHash}`)
-                    });
-            }
+                wialon.core.Session.getInstance().createAuthHash(function(code, data) {
+                    if (code != 0) {
+                        console.log(code); return;
+                    }
+                    window.open(                            
+                        encodeURI(
+                            `${okdeskUrl}/wialonauth/?user=${username}&baseUrl=http://${baseurl}&authHash=${data.authHash}`
+                            )
+                        )
+                })};
 
             var onct = function onCicadaTools() {
-                var output = {};
-                document.cookie.split(/\s*;\s*/).forEach(function (pair) {
-                    pair = pair.split(/\s*=\s*/);
-                    output[pair[0]] = pair.splice(1).join('=');
-                });
-                baseurl = wialon.core.Session.getInstance().__appDns
-                sid = wialon.core.Session.getInstance().__sessionId
-                fetch(`https://${baseurl}/wialon/ajax.html?svc=core/create_auth_hash&params={}&sid=${sid}`)
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        window.open(`https://t.me/${telegramCicadaTools}?start=${data.authHash}`)
-                    });
-            }
+                wialon.core.Session.getInstance().createAuthHash(function(code, data) {
+                    if (code != 0) {
+                        console.log(code); return;
+                    }
+                    window.open(                            
+                        encodeURI(
+                            `https://t.me/${telegramCicadaTools}?start=${data.authHash}`
+                            )
+                        )
+                })};
+
             document.getElementById('okd_login').onclick = onokd
             document.getElementById('cicada_tools').onclick = onct
         }
@@ -123,18 +115,6 @@ loader.push(function () {
                     return origap.apply(this, arguments);
                 }
             })();
-
-//             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
-//                 let target = e.currentTarget
-//                 let sensor_squares = target.querySelectorAll('[mod="monitoring_units_sensor"]')
-
-//                 sensor_squares.forEach(element => {
-//                     if (element.firstChild.firstChild.firstChild) {
-//                         element.firstChild.firstChild.firstChild.style['border-radius'] = '50%'
-//                     }
-//                 })
-
-//             })
 
             $(document.getElementById('monitoring_units_target')).on('append', function (e) {
                 let target = e.currentTarget
@@ -188,7 +168,7 @@ loader.push(function () {
                                     });
                             }
                         }
-                        
+
                         if (element.firstChild.firstChild) {
                             let own_class = element.firstChild.firstChild.classList[0]
                             element.onclick = resetBat
