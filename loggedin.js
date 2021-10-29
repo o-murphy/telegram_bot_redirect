@@ -127,7 +127,7 @@ loader.push(function () {
                                     if (code) msg(wialon.core.Errors.getErrorText(code));
                                     else{
                                         msg("<b>'"+ data.n +"'</b> sensor updated successfully ");
-                                        location.reload()
+                                        if (window.confirm(lang_dict[language]['reload'])) {location.reload()}
                                     }
                                 })
                             }
