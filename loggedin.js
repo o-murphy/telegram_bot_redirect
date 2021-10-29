@@ -1,6 +1,6 @@
 loader.push(function () {
     WebCMS.after_init_call(function () {
-        // make sure that if an error occurs, it doesn't break other scripts on the page
+    // make sure that if an error occurs, it doesn't break other scripts on the page
 
         var telegramBot = "https://t.me/tcs_okdesk_bot"
         var telegramCicadaTools = "tcs_cicada_bot"
@@ -8,6 +8,7 @@ loader.push(function () {
         var okdeskUrl = 'https://trans-control.okdesk.ru'
 
         language = wialon.core.Session.getInstance().__currUser.$$user_customProps.language
+        function msg(text) { $("#log").prepend(text + "<br/>"); }
 
         lang_dict = {
             'ru': {
@@ -79,26 +80,6 @@ loader.push(function () {
         }
 
         try {
-            let dns = wialon.core.Session.getInstance().__appDns
-            let sid = wialon.core.Session.getInstance().__sessionId
-
-            let url = `https://${dns}/wialon/ajax.html`
-
-            async function postData(url = '', data = '') {
-                const response = await fetch(url, {
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                    mode: 'cors', // no-cors, *cors, same-origin
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        // 'Content-Type': 'application/json'
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: data
-                });
-                return await response.json();
-            }
-
             (function () {
                 var ev = new $.Event('remove'),
                     orig = $.fn.remove;
@@ -122,8 +103,11 @@ loader.push(function () {
 
                     let child = element.firstChild
                     let object_id = parseInt(child.classList[0].split('-')[3])
-                    let hw_type = WebCMS.getHwById(wialon.core.Session.getInstance().__itemsById[object_id].$$user_deviceTypeId)
 
+                    sess = wialon.core.Session.getInstance()
+                    u = sess.__itemsById[object_id]
+
+                    hw_type = WebCMS.getHwById(u.$$user_deviceTypeId)
                     if (hw_type.name === 'Bitrek BI 310') {
 
                         element.setAttribute('style', 'cursor: pointer;');
@@ -131,39 +115,21 @@ loader.push(function () {
                         let resetBat = function onResetBat() {
                             var answer = window.confirm(lang_dict[language]['alert']);
                             if (answer === true) {
+                                sess = wialon.core.Session.getInstance()
+                                u = sess.__itemsById[object_id]
+                                sens103 = u.$$user_lastMessage.p.sens103
+                                sensors = u.$$user_sensors
 
-                                let dns = wialon.core.Session.getInstance().__appDns
-                                let sid = wialon.core.Session.getInstance().__sessionId
-
-                                let url = `https://${dns}/wialon/ajax.html`
-                                let sens103 = wialon.core.Session.getInstance().__itemsById[object_id].$$user_lastMessage.p.sens103
-
-                                let sens = wialon.core.Session.getInstance().__itemsById[object_id].$$user_sensors
-                                sens_id = Object.values(sens).map((x) => x).find(x => x.n === 'reset_battery_value').id
-
-                                let params = {
-                                    "itemId": object_id,
-                                    "n": "reset_battery_value",
-                                    "t": "custom",
-                                    "d": "cicada_tools_aс",
-                                    "m": "",
-                                    "p": `const${sens103}`,
-                                    "f": 0,
-                                    "c": "{\"act\":0,\"appear_in_popup\":false,\"ci\":{},\"cm\":1,\"mu\":0,\"pos\":6,\"show_time\":false,\"timeout\":0}",
-                                    "vt": 0,
-                                    "vs": 0,
-                                    "tbl": [],
-                                    "unlink": false,
-                                    "callMode": 'update',
-                                    'id': sens_id
-                                }
-
-                                formData = `svc=unit/update_sensor&params=${JSON.stringify(params)}&sid=${sid}`
-
-                                postData(url, formData)
-                                    .then((data) => {
-                                        console.log()
-                                    });
+                                cur_sens = Object.values(sensors).map((x) => x).find(x => x.n === 'reset_battery_value')
+                                console.log(cur_sens)
+                                cur_sens.p = `const${sens103}`
+                                u.updateSensor(cur_sens, function(code, data) {
+                                    if (code) msg(wialon.core.Errors.getErrorText(code));
+                                    else{
+                                        msg("<b>'"+ data.n +"'</b> sensor updated successfully ");
+                                        location.reload()
+                                    }
+                                })
                             }
                         }
 
