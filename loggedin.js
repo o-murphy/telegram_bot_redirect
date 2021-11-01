@@ -1,6 +1,6 @@
 loader.push(function () {
     WebCMS.after_init_call(function () {
-    // make sure that if an error occurs, it doesn't break other scripts on the page
+        // make sure that if an error occurs, it doesn't break other scripts on the page
 
         var telegramBot = "https://t.me/tcs_okdesk_bot"
         var telegramCicadaTools = "tcs_cicada_bot"
@@ -107,45 +107,47 @@ loader.push(function () {
                     let child = element.firstChild
                     let object_id = parseInt(child.classList[0].split('-')[3])
 
-                    sess = wialon.core.Session.getInstance()
-                    u = sess.__itemsById[object_id]
+                    if (object_id) {
+                        sess = wialon.core.Session.getInstance()
+                        u = sess.__itemsById[object_id]
 
-                    hw_type = WebCMS.getHwById(u.$$user_deviceTypeId)
-                    if (hw_type.name === 'Bitrek BI 310') {
+                        hw_type = WebCMS.getHwById(u.$$user_deviceTypeId)
+                        if (hw_type.name === 'Bitrek BI 310') {
 
-                        element.setAttribute('style', 'cursor: pointer;');
+                            element.setAttribute('style', 'cursor: pointer;');
 
-                        let resetBat = function onResetBat() {
-                            var answer = window.confirm(lang_dict[language]['alert']);
-                            if (answer === true) {
-                                sess = wialon.core.Session.getInstance()
-                                u = sess.__itemsById[object_id]
-                                sens103 = u.$$user_lastMessage.p.sens103
-                                sensors = u.$$user_sensors
+                            let resetBat = function onResetBat() {
+                                var answer = window.confirm(lang_dict[language]['alert']);
+                                if (answer === true) {
+                                    sess = wialon.core.Session.getInstance()
+                                    u = sess.__itemsById[object_id]
+                                    sens103 = u.$$user_lastMessage.p.sens103
+                                    sensors = u.$$user_sensors
 
-                                cur_sens = Object.values(sensors).map((x) => x).find(x => x.n === 'reset_battery_value')
-                                console.log(cur_sens)
-                                cur_sens.p = `const${sens103}`
-                                u.updateSensor(cur_sens, function(code, data) {
-                                    if (code) msg(wialon.core.Errors.getErrorText(code));
-                                    else{
-                                        msg("<b>'"+ data.n +"'</b> sensor updated successfully ");
-                                        if (window.confirm(lang_dict[language]['reload'])) {location.reload()}
-                                    }
-                                })
+                                    cur_sens = Object.values(sensors).map((x) => x).find(x => x.n === 'reset_battery_value')
+                                    console.log(cur_sens)
+                                    cur_sens.p = `const${sens103}`
+                                    u.updateSensor(cur_sens, function(code, data) {
+                                        if (code) msg(wialon.core.Errors.getErrorText(code));
+                                        else{
+                                            msg("<b>'"+ data.n +"'</b> sensor updated successfully ");
+                                            if (window.confirm(lang_dict[language]['reload'])) {location.reload()}
+                                        }
+                                    })
+                                }
                             }
+
+                            if (element.firstChild.firstChild) {
+                                let own_class = element.firstChild.firstChild.classList[0]
+                                element.onclick = resetBat
+                                element.firstChild.onmouseover = function () {
+                                    element.firstChild.firstChild.setAttribute('class', 'icon-remove')
+                                }
+                                element.firstChild.onmouseleave = function () {
+                                    element.firstChild.firstChild.setAttribute('class', own_class)
+                                }
+                            } 
                         }
-
-                        if (element.firstChild.firstChild) {
-                            let own_class = element.firstChild.firstChild.classList[0]
-                            element.onclick = resetBat
-                            element.firstChild.onmouseover = function () {
-                                element.firstChild.firstChild.setAttribute('class', 'icon-remove')
-                            }
-                            element.firstChild.onmouseleave = function () {
-                                element.firstChild.firstChild.setAttribute('class', own_class)
-                            }
-                        } 
                     }
                 });
             });
