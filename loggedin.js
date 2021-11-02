@@ -106,6 +106,12 @@ loader.push(function () {
 
                     let child = element.firstChild
                     if (child.hasOwnProperty("_monitoringUnitsBattery")) {
+                        reg = new RegExp(lang_dict[language]['title'], "g")
+                        if (child._monitoringUnitsBattery.title.search(reg) === -1 
+                            && child._monitoringUnitsBattery.title != 'Состояние неизвестно') {
+                            child._monitoringUnitsBattery.title += `\n${lang_dict[language]['title']}`
+                        }
+
                         let object_id = parseInt(child.classList[0].split('-')[3])
                         sess = wialon.core.Session.getInstance()
                         u = sess.__itemsById[object_id]
