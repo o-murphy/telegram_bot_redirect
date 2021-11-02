@@ -105,9 +105,8 @@ loader.push(function () {
                 bats.forEach(element => {
 
                     let child = element.firstChild
-                    let object_id = parseInt(child.classList[0].split('-')[3])
-
-                    if (object_id) {
+                    if (child.hasOwnProperty("_monitoringUnitsBattery")) {
+                        let object_id = parseInt(child.classList[0].split('-')[3])
                         sess = wialon.core.Session.getInstance()
                         u = sess.__itemsById[object_id]
 
