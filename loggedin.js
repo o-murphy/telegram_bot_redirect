@@ -88,6 +88,8 @@ loader.push(function () {
                     orig = $.fn.remove;
                 var evap = new $.Event('append'),
                     origap = $.fn.append;
+                var evsc = new $.Event('scroll'),
+                    origsc = $.fn.scroll;
                 $.fn.remove = function () {
                     $(this).trigger(ev);
                     return orig.apply(this, arguments);
@@ -96,10 +98,16 @@ loader.push(function () {
                     $(this).trigger(evap);
                     return origap.apply(this, arguments);
                 }
+                $.fn.scroll = function () {
+                    $(this).trigger(evsc);
+                    return origsc.apply(this, arguments);
+                }
             })();
 
-            $(document.getElementById('monitoring_units_target')).on('append', function (e) {
-                let target = e.currentTarget
+            var mfunc = function mainFunc(e) {
+                console.log('scroll')
+                // let target = e.currentTarget
+                target = document.getElementById('monitoring_units_target')
                 let bats = target.querySelectorAll('[mod="monitoring_units_battery"]')
 
                 bats.forEach(element => {
@@ -155,7 +163,20 @@ loader.push(function () {
                         }
                     }
                 });
+            }
+            
+            $(document.getElementById('monitoring_units_target')).on('append', mfunc);
+            
+
+            // $(document.getElementById('monitoring_units_target_div')).on('scroll', mfunc)
+            
+            function sleep (time) {
+                return new Promise((resolve) => setTimeout(resolve, time));
+            }
+            sleep(2000).then(() => {
+                $(document.getElementById('monitoring_units_target_div')).on('scroll', mfunc)
             });
+
             $(document).on('remove', function (e) { });
         }
         catch (err) {
