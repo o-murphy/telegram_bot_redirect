@@ -21,7 +21,6 @@ try {
     })();
 
     var mfunc = function mainFunc(e) {
-        console.log('scroll')
         // let target = e.currentTarget
         target = document.getElementById('monitoring_units_target')
         let bats = target.querySelectorAll('[mod="monitoring_units_battery"]')
