@@ -9,7 +9,6 @@ loader.push(function () {
         }
 
         function ext_script_init(key, value) {
-            console.log(key, value)
             try {
                 var ext_script = document.createElement('script')
                 Object.assign(ext_script, {
