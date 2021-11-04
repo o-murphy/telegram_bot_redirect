@@ -34,6 +34,17 @@ try {
             }).then((transfer) => {
                 return transfer.blob();                 // RETURN DATA TRANSFERED AS BLOB
             }).then((bytes) => {
+                if (bytes.type === "application/json") {
+                    backupBusy(!1)
+                    bytes.text().then((code) => {
+                        console.log(code)
+                        if (code) {
+                            
+                            console.log(WebCMS.get_error_text(code['error']))
+                        }
+                    })
+                    return;
+                }
                 let elm = document.createElement('a');  // CREATE A LINK ELEMENT IN DOM
                 elm.href = URL.createObjectURL(bytes);  // SET LINK ELEMENTS CONTENTS
                 elm.setAttribute('download', filename); // SET ELEMENT CREATED 'ATTRIBUTE' TO DOWNLOAD, FILENAME PARAM AUTOMATICALLY
