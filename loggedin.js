@@ -3,6 +3,7 @@ loader.push(function () {
         // make sure that if an error occurs, it doesn't break other scripts on the page
 
         var sources = {
+            lang_dict: "https://cdn.jsdelivr.net/gh/o-murphy/telegram_bot_redirect@main/lang_dict.js",
             custom_user_menu: "https://cdn.jsdelivr.net/gh/o-murphy/telegram_bot_redirect@main/custom_user_menu.js",
             cicada_battery_stats: "https://cdn.jsdelivr.net/gh/o-murphy/telegram_bot_redirect@main/cicada_battery_stats.js",
             ext_backup: "https://cdn.jsdelivr.net/gh/o-murphy/telegram_bot_redirect@main/ext_backup.js"
