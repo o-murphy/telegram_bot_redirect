@@ -13,8 +13,8 @@ try {
         i = wialon.core.Session.getInstance();
         itemId = document.getElementById("messages_filter_units").getVTBValue()
         
-        item = WebCMS.modules.monitoring_units.get_units().filter(x => {if(x._id === itemId) {return x}})[0]
-        filename = item.$$user_name + '_' + item.$$user_uniqueId
+        u = i.__itemsById[itemId]
+        filename = u.$$user_name + '_' + u.$$user_uniqueId
 
         timeTo = i.getServerTime()
         timeFrom = timeTo - 31622400
