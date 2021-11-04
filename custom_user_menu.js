@@ -4,27 +4,6 @@ try {
     var okdeskFav = 'https://static-ck.okdesk.ru/okdesktest/favicons/1/original/okdesk_avatar_02_no-bg_%282%29.ico'
     var okdeskUrl = 'https://trans-control.okdesk.ru'
 
-    language = wialon.core.Session.getInstance().__currUser.$$user_customProps.language
-    function msg(text) { $("#log").prepend(text + "<br/>"); }
-
-    lang_dict = {
-        'ru': {
-            'title': 'Нажмите, что бы обнулить заряд',
-            'alert': 'Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!',
-            'reload': 'Требуется перезагрузить страницу, чтобы новые данные появились в панели "Мониторинг". Перезагрузить?'
-        },
-        'uk': {
-            'title': 'Натисніть, щоб скинути заряд',
-            'alert': 'Ви точно хочете скинути заряд акумулятора? Цю дію не можна скасувати!',
-            'reload': 'Потрібно оновити сторінку, аби нові дані з\'явились у панелі "Моніторинг". Оновити?'
-        },
-        'en': {
-            'title': 'Click, to reset battery charge',
-            'alert': "Are you sure you want to reset your battery? This action cannot be undone!",
-            'reload': 'Page need to be update to reload data on "Monitoring" tab. Update?'
-        },
-    }
-
     menu = document.getElementById('sub_dom_f5acebef_3');
     menu_ul = menu.firstChild;
     menu_support = document.getElementById('sub_dom_f5acebef_3_5');
