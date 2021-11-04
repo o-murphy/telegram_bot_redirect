@@ -12,9 +12,12 @@ try {
     function makeMSGBackup() {
         i = wialon.core.Session.getInstance();
         itemId = document.getElementById("messages_filter_units").getVTBValue()
+        
+        item = WebCMS.modules.monitoring_units.get_units().filter(x => {if(x._id === itemId) {return x}})[0]
+        filename = item.$$user_name + '_' + item.$$user_uniqueId
+
         timeTo = i.getServerTime()
         timeFrom = timeTo - 31622400
-        backupBusy(!0)
         var r = {
             format: 'wlb',
             itemId: itemId,
@@ -25,6 +28,7 @@ try {
         url = location.origin + i.getApiPath() + "?sid=" + i.getId() + "&svc=exchange/export_messages&params=" + qx.lang.Json.stringify(r)
 
         function download(url, filename) {
+            backupBusy(!0)
             fetch(url, {
                 mode: 'no-cors' 
             }).then((transfer) => {
@@ -41,7 +45,7 @@ try {
             })
         }
 
-        download(url, itemId)        
+        download(url, filename)        
     }
 
     function makeBackupButton() {
