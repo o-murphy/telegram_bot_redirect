@@ -37,10 +37,8 @@ try {
                 if (bytes.type === "application/json") {
                     backupBusy(!1)
                     bytes.text().then((code) => {
-                        console.log(code)
                         if (code) {
-                            
-                            console.log(WebCMS.get_error_text(code['error']))
+                            WebCMS.log_msg(WebCMS.get_error_text(JSON.parse(code).error), 2)
                         }
                     })
                     return;
