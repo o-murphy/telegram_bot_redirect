@@ -74,7 +74,7 @@ try {
     }
 
     $(document.getElementById('monitoring_units_target')).on('append', mfunc);
-    document.getElementById('monitoring_units_target_div').onmousewheel = mfunc
+//     document.getElementById('monitoring_units_target_div').onmousewheel = mfunc
     document.getElementById('monitoring_units_target_div').onscroll = mfunc
     $(document).on('remove', function (e) { });
 }
