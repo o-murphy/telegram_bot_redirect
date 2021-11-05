@@ -38,7 +38,11 @@ try {
                     backupBusy(!1)
                     bytes.text().then((code) => {
                         if (code) {
-                            WebCMS.log_msg(WebCMS.get_error_text(JSON.parse(code).error), 2)
+                            // WebCMS.log_msg(WebCMS.get_error_text(JSON.parse(code).error), 2)
+                            WialonHosting.alerts.info({
+                                html: (WebCMS.get_error_text(JSON.parse(code).error)),
+                                autoHideTimeout: 1e4
+                                    })
                         }
                     })
                     return;
