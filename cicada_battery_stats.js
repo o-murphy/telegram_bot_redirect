@@ -4,8 +4,6 @@ try {
             orig = $.fn.remove;
         var evap = new $.Event('append'),
             origap = $.fn.append;
-        var evsc = new $.Event('scroll'),
-            origsc = $.fn.scroll;
         $.fn.remove = function () {
             $(this).trigger(ev);
             return orig.apply(this, arguments);
@@ -14,14 +12,9 @@ try {
             $(this).trigger(evap);
             return origap.apply(this, arguments);
         }
-        $.fn.scroll = function () {
-            $(this).trigger(evsc);
-            return origsc.apply(this, arguments);
-        }
     })();
 
     var mfunc = function mainFunc(e) {
-        // let target = e.currentTarget
         target = document.getElementById('monitoring_units_target')
         let bats = target.querySelectorAll('[mod="monitoring_units_battery"]')
 
@@ -81,17 +74,8 @@ try {
     }
 
     $(document.getElementById('monitoring_units_target')).on('append', mfunc);
-
-
-    // $(document.getElementById('monitoring_units_target_div')).on('scroll', mfunc)
-
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-    sleep(2000).then(() => {
-        $(document.getElementById('monitoring_units_target_div')).on('scroll', mfunc)
-    });
-
+    document.getElementById('monitoring_units_target_div').onmousewheel = mfunc
+    document.getElementById('monitoring_units_target_div').onscroll = mfunc
     $(document).on('remove', function (e) { });
 }
 catch (err) {
