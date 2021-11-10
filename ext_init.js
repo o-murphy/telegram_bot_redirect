@@ -11,26 +11,29 @@ try {
                 lang_dict: `${cdn}@${sha}/lang_dict.js`,
                 custom_user_menu: `${cdn}@${sha}/custom_user_menu.js`,
                 cicada_battery_stats: `${cdn}@${sha}/cicada_battery_stats.js`,
-                ext_backup: `${cdn}@${sha}/ext_backup.js`
+                ext_backup: `${cdn}@${sha}/ext_backup.js`,
+                additional: ``
             }
 
             function ext_script_init(key, value) {
-                try {
-                    var ext_script = document.createElement('script')
-                    Object.assign(ext_script, {
-                        id: key,
-                        type: "text/javascript",
-                        charset: "UTF-8",
-                        async: true,
-                        defer: true,
-                        src: value
-                    })
+                if (value) {
+                          try {
+                              var ext_script = document.createElement('script')
+                              Object.assign(ext_script, {
+                                  id: key,
+                                  type: "text/javascript",
+                                  charset: "UTF-8",
+                                  async: true,
+                                  defer: true,
+                                  src: value
+                              })
 
-                    document.head.insertAdjacentElement('beforeend', ext_script)
-                }
-                catch (err) {
-                    console.log(err);
-                }
+                              document.head.insertAdjacentElement('beforeend', ext_script)
+                          }
+                          catch (err) {
+                              console.log(err);
+                          }
+                    }
             }
 
             Object.entries(sources).forEach(([key, value]) => ext_script_init(key, value))
