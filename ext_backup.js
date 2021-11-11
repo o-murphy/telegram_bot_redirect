@@ -70,7 +70,8 @@ try {
                 type: 'button',
                 id: 'messages_filter_interval_backup',
                 value: lang_dict[language]['backup'],
-                onclick: makeMSGBackup
+                onclick: makeMSGBackup,
+                title: 'Backup copy of messages for a year'
             })
             msgs_buttons = document.getElementsByClassName('msgs-filter-table-buttons')
             msgs_buttons[0].insertAdjacentElement('afterbegin', msgs_backup_button)
