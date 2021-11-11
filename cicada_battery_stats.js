@@ -1,6 +1,5 @@
 try {
     function onResetBat(event, u) {
-        console.log(u)
         var answer = window.confirm(lang_dict[language]['alert']);
         if (answer === true) {
             sens103 = u.$$user_lastMessage.p.sens103
