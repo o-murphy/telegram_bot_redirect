@@ -7,19 +7,22 @@ try {
             'title': 'Нажмите, что бы обнулить заряд',
             'alert': 'Вы точно хотите обнулить заряд аккумулятора? Это действие нельзя отменить!',
             'reload': 'Требуется перезагрузить страницу, чтобы новые данные появились в панели "Мониторинг". Перезагрузить?',
-            'backup': 'Резервная копия'
+            'backup': 'Резервная копия',
+            'backup_title': 'Скачать резервную копию сообщений за последний год'
         },
         'uk': {
             'title': 'Натисніть, щоб скинути заряд',
             'alert': 'Ви точно хочете скинути заряд акумулятора? Цю дію не можна скасувати!',
             'reload': 'Потрібно оновити сторінку, аби нові дані з\'явились у панелі "Моніторинг". Оновити?',
-            'backup': 'Резервна копія'
+            'backup': 'Резервна копія',
+            'backup_title': 'Завантажити резервну копію повідомлень за останній рік'
         },
         'en': {
             'title': 'Click, to reset battery charge',
             'alert': "Are you sure you want to reset your battery? This action cannot be undone!",
             'reload': 'Page need to be update to reload data on "Monitoring" tab. Update?',
-            'backup': 'Backup'
+            'backup': 'Backup',
+            'backup_title': 'Download backup copy of messages for a year'
         },
     }
 
