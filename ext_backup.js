@@ -69,7 +69,7 @@ try {
                 className: 'wui-button _min-w-button _mb-2',
                 type: 'button',
                 id: 'messages_filter_interval_backup',
-                value: 'Backup',
+                value: lang_dict[language]['backup'],
                 onclick: makeMSGBackup
             })
             msgs_buttons = document.getElementsByClassName('msgs-filter-table-buttons')
