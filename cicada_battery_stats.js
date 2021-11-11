@@ -53,7 +53,7 @@ try {
             updateUnit(u, target)
         })
     }
-
+    mainFunc()
     let observer = new MutationObserver(mainFunc);
     observer.observe(document.getElementById('monitoring_units_target'), {childList: true, subtree: true});
 }
