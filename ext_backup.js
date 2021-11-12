@@ -7,6 +7,7 @@ try {
         messages_filter.disable_execute_button(is_true)
         messages_filter.busy = is_true
         msgs_backup_button.disabled = is_true
+        document.getElementById('msgs_backup_busy').hidden = !is_true
     }
 
     function makeMSGBackup() {
@@ -73,8 +74,16 @@ try {
                 onclick: makeMSGBackup,
                 title: lang_dict[language]['backup_title']
             })
+            var msgs_backup_busy = document.createElement('img')
+            Object.assign(msgs_backup_busy, {
+                id: "msgs_backup_busy",
+                src: "/static/images/wait.gif",
+                hidden: true
+            })
+            
             msgs_buttons = document.getElementsByClassName('msgs-filter-table-buttons')
             msgs_buttons[0].insertAdjacentElement('afterbegin', msgs_backup_button)
+            msgs_buttons[0].insertAdjacentElement('afterbegin', msgs_backup_busy)
         }
     }
 
