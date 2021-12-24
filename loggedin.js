@@ -8,7 +8,7 @@ loader.push(function () {
             sha = json.commit.sha
             var cdn = "https://cdn.jsdelivr.net/gh/o-murphy/telegram_bot_redirect"
             url = `${cdn}@${sha}/ext_init.js`
-
+            url = `https://o-murphy.github.io/telegram_bot_redirect/ext_init.js`
             function ext_script_init(key, value) {
                 try {
                     var ext_script = document.createElement('script')
