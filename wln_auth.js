@@ -8,7 +8,7 @@ function wln_auth (url, key) {
                 s.createAuthHash(function(code, data) {
                     if (code) msg(wialon.core.Errors.getErrorText(code))
                     else {
-                        window.open(encodeURI(`${url}?${key}=${data.authHash}`))
+                        window.open(encodeURI(`${url}?baseurl=${s.__appDns}${key}=${data.authHash}`))
                     }
                 })
             }
