@@ -6,8 +6,7 @@ try {
                 cicada_battery_stats: `${base_url}/cicada_battery_stats.js`,
                 ext_backup: `${base_url}/ext_backup.js`,
                 additional: ``,
-                wln_auth: `${base_url}/wln_auth.js`,
-                wialon_js: `https://hst-api.wialon.com/wsdk/script/wialon.js`
+                wln_auth: `${base_url}/wln_auth.js`
             }
             function ext_script_init(key, value) {
                 if (value) {
